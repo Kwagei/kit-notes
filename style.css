@@ -39,7 +39,7 @@ h1 {
 }
 
 .note-form {
-	display: none;
+	display: block;
 	padding: 20px;
 	background-color: #fff;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -177,4 +177,14 @@ h1 {
 	border-radius: 5px;
 	font-size: 16px;
 	font-weight: 500;
+}
+#titleMessage{
+	color: red;
+	font-size: 20px;
+	font-weight: 700;
+}
+#bodyMessage{
+	color: red;
+	font-size: 20px;
+	font-weight: 700;
 }
