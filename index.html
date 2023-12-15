@@ -21,12 +21,14 @@
 		<!-- Form to create a note -->
 		<div class="note-form" id="noteForm">
 			<form>
+				<div id="titleMessage" class="validation-message"></div>
 				<label for="title">Title:</label>
 				<input type="text" id="title" name="title" required />
-
+	
+				<div id="bodyMessage" class="validation-message"></div>
 				<label for="body">Body:</label>
 				<textarea id="body" name="body" rows="4" required></textarea>
-
+	
 				<button type="submit">Save Note</button>
 			</form>
 		</div>
@@ -55,6 +57,9 @@
 				</button>
 			</div>
 		</div>
+
+		
+
 
 		<script>
 			const notes = [
@@ -90,6 +95,66 @@
 			}
 
 			displayNotes();
+
+			const titleInput = document.querySelector("#title");
+    		const bodyInput = document.querySelector('#body');
+
+   			const noteForm = document.querySelector('form');
+    		noteForm.addEventListener('submit', function (event) {
+        	event.preventDefault();
+
+       		 const titleValue = titleInput.value;
+			 const bodyValue = bodyInput.value;
+
+
+
+
+  function validateTitle() {
+    const titleMessage = document.getElementById("titleMessage");
+    titleMessage.textContent = "";
+
+    if (!titleValue.trim()) {
+        titleMessage.textContent = 'Title is required';
+        return false;
+    } else if (titleValue.length <= 5) {
+        titleMessage.textContent = 'Title should be more than five characters';
+        return false;
+    } else if (!/^[a-zA-Z\s]+$/.test(titleValue)) {
+        titleMessage.textContent = 'Title should contain only letters';
+        return false;
+    } else {
+        console.log("Title is valid");
+        return true;
+    }
+}
+
+  		
+	function validateBody(){
+		const bodyMessage = document.getElementById("bodyMessage");
+        bodyMessage.textContent = "";
+
+		if (!/^[a-zA-Z\s]+$/.test(bodyValue)) {
+            bodyMessage.textContent = 'Body should contain only letters';
+            return false; 
+        }
+		else if (bodyValue.length <= 50) {
+            bodyMessage.textContent = 'Body should be more than fifty characters';
+            return false;
+        }
+		 else {
+			console.log("Body is valid")
+			return true;
+		}
+	}
+
+	if (validateTitle() && validateBody()) {
+                // Perform your save operation here
+                // If everything is valid, you can proceed with saving the note
+                console.log('Saving Note...');
+            }
+
+    });
+
 		</script>
 	</body>
 </html>
