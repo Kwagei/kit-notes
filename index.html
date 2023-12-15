@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Share your thoughts..</title>
-		<link
-			rel="stylesheet"
-			href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
-		/>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<div class="top-bar">
-			<h1>Share your thoughts..</h1>
-			<button class="create-note-button" id="createNoteButton">
-				Create Note
-			</button>
-		</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Share your thoughts..</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="top-bar">
+      <h1>Share your thoughts..</h1>
+      <button class="create-note-button" id="createNoteButton">
+        Create Note
+      </button>
+    </div>
 
-		<!-- Form to create a note -->
-		<div class="note-form" id="noteForm">
-			<form>
-				<label for="title">Title:</label>
-				<input type="text" id="title" name="title" required />
+    <!-- Form to create a note -->
+    <div class="note-form" id="noteForm">
+      <form>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required />
 
-				<label for="body">Body:</label>
-				<textarea id="body" name="body" rows="4" required></textarea>
+        <label for="body">Body:</label>
+        <textarea id="body" name="body" rows="4" required></textarea>
 
-				<button type="submit">Save Note</button>
-			</form>
-		</div>
+        <button id="save-button" type="submit">Save Note</button>
+      </form>
+    </div>
 
-		<!-- View for listing all notes -->
-		<div class="notes-container" id="notesContainer">
-			<!-- Sample Note 1 -->
-			<!-- <div class="note">
+    <!-- View for listing all notes -->
+    <div class="notes-container" id="notesContainer">
+      <!-- Sample Note 1 -->
+      <!-- <div class="note">
 				<h3>Modern Design</h3>
 				<p></p>
 				<div class="note-buttons">
@@ -43,53 +43,97 @@
 					<button class="delete-button">Delete</button>
 				</div>
 			</div> -->
-		</div>
+    </div>
 
-		<!-- Modal -->
-		<div class="modal" id="myModal">
-			<div class="modal-content">
-				<h2 id="modalTitle"></h2>
-				<p id="modalBody"></p>
-				<button class="close-modal" onclick="closeModal()">
-					Close
-				</button>
-			</div>
-		</div>
+    <!-- Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-content">
+        <h2 id="modalTitle"></h2>
+        <p id="modalBody"></p>
+        <button class="close-modal" onclick="closeModal()">Close</button>
+      </div>
+    </div>
 
-		<script>
-			const notes = [
-				{
-					title: "Inspiring Quotes",
-					body: "'The only way to do great work is to love what you do.' - Steve Jobs",
-				},
-				{
-					title: "Modern Design",
-					body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-				},
-			];
+    <script>
+      const notes = [
+        {
+          title: "Inspiring Quotes",
+          body: "'The only way to do great work is to love what you do.' - Steve Jobs",
+        },
+        {
+          title: "Modern Design",
+          body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        },
+      ];
 
-			function displayNotes() {
-				const notesEl = document.getElementById("notesContainer");
+      const notesEl = document.getElementById("notesContainer");
+      function displayNotes() {
+        notes.forEach((note) => {
+          notesEl.insertAdjacentHTML(
+            "afterbegin",
+            `
+                           <div class="note">
+                               <h3>${note.title}</h3>
+                               <p>${note.body}</p>
+                               <div class="note-buttons">
+                                   <button class="view-button">View</button>
+                                   <button class="edit-button">Edit</button>
+                                   <button class="delete-button">Delete</button>
+                               </div>
+                           </div>
+                       `
+          );
+        });
+      }
 
-				notes.forEach((note) => {
-					notesEl.insertAdjacentHTML(
-						"afterbegin",
-						`
-                        <div class="note">
-                            <h3>${note.title}</h3>
-                            <p>${note.body}</p>
-                            <div class="note-buttons">
-                                <button class="view-button">View</button>
-                                <button class="edit-button">Edit</button>
-                                <button class="delete-button">Delete</button>
-                            </div>
-                        </div>
-                    `
-					);
-				});
-			}
+      displayNotes();
 
-			displayNotes();
-		</script>
-	</body>
+      const createNotes = document.getElementById("createNoteButton");
+      const noteForm = document.getElementById("noteForm");
+
+      createNotes.addEventListener("click", toggleNotesForm);
+
+	  let inputEl = document.getElementById("title");
+	  let textAreaEl = document.getElementById("body");
+
+      function toggleNotesForm() {
+		inputEl.value = " ";
+	  	textAreaEl.value = " "
+        noteForm.classList.toggle("note-form-display");
+      }
+
+	  
+
+      function saveNotes(e) {
+        e.preventDefault();
+        let note = {
+            title: inputEl.value,
+            body: textAreaEl.value,
+          };
+
+		
+
+        notes.push(note);
+        console.log(notes[notes.length - 1].title);
+        notesEl.insertAdjacentHTML(
+            "afterbegin",
+            `
+                           <div class="note">
+                               <h3>${notes[notes.length -1].title}</h3>
+                               <p>${notes[notes.length -1].body}</p>
+                               <div class="note-buttons">
+                                   <button class="view-button">View</button>
+                                   <button class="edit-button">Edit</button>
+                                   <button class="delete-button">Delete</button>
+                               </div>
+                           </div>
+                       `
+          );
+        noteForm.classList.remove("note-form-display");
+
+      }
+	  
+      noteForm.addEventListener("submit", saveNotes);
+    </script>
+  </body>
 </html>

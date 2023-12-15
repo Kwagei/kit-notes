@@ -47,6 +47,10 @@ h1 {
 	margin: 20px 20px;
 }
 
+.note-form-display {
+	display: block;
+}
+
 .note-form label {
 	display: block;
 	margin-bottom: 10px;
@@ -178,3 +182,54 @@ h1 {
 	font-size: 16px;
 	font-weight: 500;
 }
+
+/* .input input {
+	color: white;
+	padding: 20px;
+	width: 100%;
+	border: none;
+	background: transparent;
+	border-bottom: 2px solid white;
+	font-size: 20px;
+}
+
+.input input:focus {
+	outline: none;
+}
+
+input {
+	margin-bottom: 30px;
+}
+
+.textarea textarea {
+	color: white;
+	padding: 20px;
+	border: none;
+	width: 100%;
+	background: transparent;
+	border-bottom: 2px solid white;
+	font-size: 20px;
+}
+
+.textarea textarea:focus {
+	outline: none;
+}
+
+.button button {
+	display: flex;
+	justify-content: flex-start;
+}
+
+button {
+	padding: 8px;
+	margin-top: 30px;
+	cursor: pointer;
+	color: var(----secondary-blue);
+	background-color: black;
+	border-radius: 5px;
+	border: none;
+} */
+
+/* .hidden {
+	display: none;
+} */
